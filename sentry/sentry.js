@@ -150,7 +150,8 @@ module.exports = function(RED) {
 					wrapError(msg.error, err=>Sentry.captureException(err));
 					errorSent = true;//sent
 				}
-			}catch(err){
+			} catch (err) {
+				Sentry.captureException(err)
 				node.error(err);
 			}
 			msg.payload = {sent:errorSent};
