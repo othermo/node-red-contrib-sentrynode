@@ -9,6 +9,7 @@ module.exports = function(RED) {
 	function isValidObject(input){
 		return typeof input === 'object'
 			&& input !== null
+			&& input !== undefined
 			&& Object.keys(input).length>0;
 	}
 	
@@ -49,8 +50,8 @@ module.exports = function(RED) {
 	**/
 	function buildErrorStackFrames(error_message, node_id){
 		let matches = error_message.match(/line (\d+), col (\d+)/mi);
-		let line = matches[1] || 0;
-		let pos = matches[2] || 0;
+		let line = matches?.[1] || 0;
+		let pos = matches?.[2] || 0;
 		
 		const node_info = getNodeDetails(node_id);
 		
